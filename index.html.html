@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRŽNICA SLOVENSKO.SK</title>
+
+<style>
+body { margin:0; font-family:Arial,sans-serif; background:#f4f6f8; color:#1f2937; }
+header { background:#1e40af; color:white; padding:0.7rem 1.5rem; display:flex; align-items:center; gap:15px; }
+header span { font-size:1.1rem; font-weight:bold; }
+header button, header a {
+  background:white;
+  color:#1e40af;
+  border:none;
+  padding:6px 12px;
+  border-radius:6px;
+  font-weight:bold;
+  cursor:pointer;
+  text-decoration:none;
+}
+
+.hero { background:linear-gradient(135deg,#2563eb,#3b82f6); color:white; padding:3rem 2rem; text-align:center; }
+.hero h1 { font-size:2.6rem; }
+
+.features { max-width:1100px; margin:auto; padding:2rem; display:flex; gap:1.5rem; flex-wrap:wrap; }
+.feature { background:white; flex:1 1 300px; padding:1.5rem; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.12); cursor:pointer; }
+.feature-detail { display:none; margin-top:1rem; }
+
+section { max-width:1200px; margin:auto; padding:3rem 2rem; }
+
+.cards { display:flex; gap:1.5rem; flex-wrap:wrap; }
+.card { background:white; flex:1 1 320px; padding:1.5rem; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.12); cursor:pointer; }
+.card-detail { display:none; margin-top:1rem; }
+
+form { background:white; padding:2rem; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.12); max-width:600px; margin:auto; }
+form input, form select, form textarea {
+  width:100%; padding:10px; margin:8px 0; border-radius:6px; border:1px solid #ccc;
+}
+form button {
+  background:#0b57d0; color:white; border:none; padding:12px; width:100%; border-radius:6px; cursor:pointer;
+}
+
+footer { background:#1e40af; color:white; text-align:center; padding:1.5rem; }
+
+#authPanel, #cennik, #obchodne { display:none; padding:2rem; }
+
+.refFoto { max-width:200px; margin-top:10px; border-radius:6px; display:none; }
+</style>
+</head>
+
+<body>
+
+<header>
+<span>TRŽNICA SLOVENSKO.SK</span>
+<button onclick="toggleAuth()">Prihlásenie / Registrácia</button>
+<a onclick="toggleBox('cennik')">Cenník</a>
+<a onclick="toggleBox('obchodne')">Obchodné podmienky</a>
+</header>
+
+<!-- AUTH -->
+<div id="authPanel">
+
+<form>
+<h2>Prihlásenie</h2>
+<input type="email" placeholder="Email" required>
+<input type="password" placeholder="Heslo" required>
+<button>Prihlásiť sa</button>
+</form>
+
+<br>
+
+<form>
+<h2>Registrácia</h2>
+
+<select required>
+<option value="">Typ účtu</option>
+<option>Zákazník</option>
+<option>Remeselník</option>
+</select>
+
+<select required>
+<option value="">Kategória služby</option>
+<option>Stavebné a technické remeslá</option>
+<option>Inštalácie a opravy</option>
+<option>Drevárske a kovové práce</option>
+<option>Povrchové a dizajnové práce</option>
+<option>Služby pre domácnosť</option>
+<option>Záhrada a exteriér</option>
+<option>Auto a technika</option>
+<option>Remeselná výroba</option>
+<option>Digitálne a kreatívne služby</option>
+<option>Lokálne a osobné služby</option>
+<option>BOZP a revízie</option>
+</select>
+
+<input type="text" placeholder="Meno / Názov" required>
+<input type="email" placeholder="Email" required>
+<input type="tel" placeholder="Telefón" required>
+<input type="text" placeholder="Mesto / Región" required>
+<textarea placeholder="Popis služby" required></textarea>
+
+<label>Fotka / certifikát (1 súbor)</label>
+<input type="file" id="fotoInput" accept="image/*">
+<img id="fotoPreview" class="refFoto">
+
+<label>
+<input type="checkbox" required> Súhlasím s obchodnými podmienkami
+</label>
+
+<button>Registrovať</button>
+</form>
+</div>
+
+<!-- CENNÍK -->
+<div id="cennik">
+<h3>Cenník</h3>
+<ul>
+<li>Malý dopyt – 1 kredit</li>
+<li>Stredný dopyt – 2–3 kredity</li>
+<li>Veľká zákazka – 5+ kreditov</li>
+<li>Balíky: 10 / 30 / 100 kreditov</li>
+</ul>
+</div>
+
+<!-- OBCHODNÉ PODMIENKY -->
+<div id="obchodne">
+<h3>Obchodné podmienky</h3>
+<p>Platforma slúži výhradne ako sprostredkovateľ. Zodpovednosť za realizáciu služby nesú výlučne zákazník a remeselník.</p>
+<p>Platby prebiehajú kartou. Kontaktné údaje sú sprístupnené až po zaplatení kreditu.</p>
+</div>
+
+<div class="hero">
+<h1>TRŽNICA SLOVENSKO.SK</h1>
+<p>Jednoduché spojenie zákazníkov a remeselníkov bez zbytočných poplatkov.</p>
+</div>
+
+<!-- FEATURES -->
+<div class="features">
+<div class="feature" onclick="toggle('f1')">Jednoduché používanie
+<div id="f1" class="feature-detail">Zadanie dopytu bez telefonátov.</div></div>
+
+<div class="feature" onclick="toggle('f2')">Prehľadné informácie
+<div id="f2" class="feature-detail">Jasné ceny, regióny a hodnotenia.</div></div>
+
+<div class="feature" onclick="toggle('f3')">Rýchly prístup k službám
+<div id="f3" class="feature-detail">Platíš len za reálny záujem.</div></div>
+</div>
+
+<!-- KATEGÓRIE -->
+<section>
+<h2>Kategórie služieb</h2>
+<div class="cards">
+
+<div class="card" onclick="toggle('k1')">🛠️ Stavebné a technické remeslá
+<div id="k1" class="card-detail">Murár, Tesár, Obkladač, Maliar</div></div>
+
+<div class="card" onclick="toggle('k2')">🔧 Inštalácie a opravy
+<div id="k2" class="card-detail">Elektrikár, Vodár, Kúrenár</div></div>
+
+<div class="card" onclick="toggle('k3')">🪵 Drevárske a kovové práce
+<div id="k3" class="card-detail">Stolár, Zvárač</div></div>
+
+<div class="card" onclick="toggle('k4')">🎨 Povrchové práce
+<div id="k4" class="card-detail">Maľovanie, Dizajn</div></div>
+
+<div class="card" onclick="toggle('k5')">🧹 Domácnosť
+<div id="k5" class="card-detail">Upratovanie, Tepovanie</div></div>
+
+<div class="card" onclick="toggle('k6')">🌳 Záhrada
+<div id="k6" class="card-detail">Kosenie, Ploty</div></div>
+
+<div class="card" onclick="toggle('k7')">🚗 Auto
+<div id="k7" class="card-detail">Automechanik</div></div>
+
+<div class="card" onclick="toggle('k8')">💻 Digitálne služby
+<div id="k8" class="card-detail">Web, Marketing</div></div>
+
+<div class="card" onclick="toggle('k9')">🔒 BOZP
+<div id="k9" class="card-detail">Revízie</div></div>
+
+</div>
+</section>
+
+<!-- OBJEDNÁVKA -->
+<section>
+<h2>Odoslať objednávku</h2>
+<form action="https://formspree.io/f/xaqqevlw" method="POST">
+<input type="text" name="name" placeholder="Meno zákazníka" required>
+<input type="email" name="_replyto" placeholder="Email zákazníka" required>
+<select name="kategoria" required>
+<option value="">Vyber službu</option>
+<option>Stavebné práce</option>
+<option>Inštalácie</option>
+<option>Záhrada</option>
+<option>Domácnosť</option>
+</select>
+<textarea name="message" placeholder="Popis dopytu" required></textarea>
+<button>Odoslať dopyt</button>
+</form>
+</section>
+
+<footer>
+© 2026 TRŽNICA SLOVENSKO.SK
+</footer>
+
+<script>
+function toggle(id){
+const e=document.getElementById(id);
+e.style.display=e.style.display==="block"?"none":"block";
+}
+function toggleAuth(){ toggleBox("authPanel"); }
+function toggleBox(id){ toggle(id); }
+
+const fotoInput=document.getElementById("fotoInput");
+const fotoPreview=document.getElementById("fotoPreview");
+fotoInput.addEventListener("change",()=>{
+const f=fotoInput.files[0];
+if(f){
+const r=new FileReader();
+r.onload=()=>{ fotoPreview.src=r.result; fotoPreview.style.display="block"; };
+r.readAsDataURL(f);
+}
+});
+</script>
+
+</body>
+</html>
